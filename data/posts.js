@@ -2,7 +2,7 @@ import { USERS } from "./users";
 
 export const POSTS = [
   {
-    imageurl:
+    imageUrl:
       "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=1.00xw:0.669xh;0,0.190xh&resize=1200:*",
     user: USERS[0].user,
     likes: 1120,
@@ -21,7 +21,7 @@ export const POSTS = [
     ],
   },
   {
-    imageurl:
+    imageUrl:
       "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=1.00xw:0.669xh;0,0.190xh&resize=1200:*",
     user: USERS[4].user,
     likes: 4324,
@@ -37,7 +37,7 @@ export const POSTS = [
     ],
   },
   {
-    imageurl:
+    imageUrl:
       "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=1.00xw:0.669xh;0,0.190xh&resize=1200:*",
     user: USERS[4].user,
     likes: 4324,
@@ -53,7 +53,7 @@ export const POSTS = [
     ],
   },
   {
-    imageurl:
+    imageUrl:
       "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=1.00xw:0.669xh;0,0.190xh&resize=1200:*",
     user: USERS[4].user,
     likes: 4324,
@@ -69,7 +69,7 @@ export const POSTS = [
     ],
   },
   {
-    imageurl:
+    imageUrl:
       "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=1.00xw:0.669xh;0,0.190xh&resize=1200:*",
     user: USERS[4].user,
     likes: 4324,
@@ -85,7 +85,7 @@ export const POSTS = [
     ],
   },
   {
-    imageurl:
+    imageUrl:
       "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=1.00xw:0.669xh;0,0.190xh&resize=1200:*",
     user: USERS[4].user,
     likes: 4324,
