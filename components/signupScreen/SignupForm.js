@@ -10,6 +10,7 @@ import React from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import Validator from "email-validator";
+import { firebase, db } from "../../firebase";
 
 const SignupForm = ({ navigation }) => {
   const SignupFormSchema = Yup.object().shape({
@@ -19,12 +20,36 @@ const SignupForm = ({ navigation }) => {
       .required()
       .min(6, "Your password must be at least 6 characters long"),
   });
+
+  const getRandomProfilePic = async () => {
+    const response = await fetch("https://randomuser.me/api/");
+    const data = await response.json();
+    return data.results[0].picture.large;
+  };
+
+  const onSignup = async (email, password, username) => {
+    try {
+      const authUser = await firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password);
+      console.log("Account created!");
+
+      db.collection("users").add({
+        owner_uid: authUser.user.uid,
+        username: username,
+        email: authUser.user.email,
+        profile_picture: await getRandomProfilePic(),
+      });
+    } catch (error) {
+      Alert.alert("Oh No!!!", error.message);
+    }
+  };
   return (
     <View style={styles.wrapper}>
       <Formik
         initialValues={{ email: "", username: "", password: "" }}
         onSubmit={(values) => {
-          console.log(values);
+          onSignup(values.email, values.password);
         }}
         validationSchema={SignupFormSchema}
         validateOnMount={true}
