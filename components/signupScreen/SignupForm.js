@@ -131,12 +131,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderWidth: 1,
   },
-  loginContainer: {
-    flexDirection: "row",
-    width: "100%",
-    justifyContent: "center",
-    marginTop: 50,
-  },
   button: (isValid) => ({
     backgroundColor: isValid ? "#0096f6" : "#9ACAF7",
     alignItems: "center",
