@@ -5,6 +5,7 @@ import {
   Text,
   TouchableOpacity,
   Pressable,
+  Alert,
 } from "react-native";
 import React from "react";
 import { Formik } from "formik";
@@ -22,7 +23,7 @@ const SignupForm = ({ navigation }) => {
   });
 
   const getRandomProfilePic = async () => {
-    const response = await fetch("https://randomuser.me/api/");
+    const response = await fetch("https://randomuser.me/api");
     const data = await response.json();
     return data.results[0].picture.large;
   };
@@ -34,12 +35,15 @@ const SignupForm = ({ navigation }) => {
         .createUserWithEmailAndPassword(email, password);
       console.log("Account created!");
 
-      db.collection("users").add({
-        owner_uid: authUser.user.uid,
-        username: username,
-        email: authUser.user.email,
-        profile_picture: await getRandomProfilePic(),
-      });
+      db.collection("users")
+        .doc(authUser.user.email)
+        .set({
+          owner_uid: authUser.user.uid,
+          username: username,
+          email: authUser.user.email,
+          profile_picture: await getRandomProfilePic(),
+        });
+      console.log("Added to the database!");
     } catch (error) {
       Alert.alert("Oh No!!!", error.message);
     }
@@ -49,7 +53,7 @@ const SignupForm = ({ navigation }) => {
       <Formik
         initialValues={{ email: "", username: "", password: "" }}
         onSubmit={(values) => {
-          onSignup(values.email, values.password);
+          onSignup(values.email, values.password, values.username);
         }}
         validationSchema={SignupFormSchema}
         validateOnMount={true}
