@@ -5,36 +5,25 @@ import {
   StyleSheet,
   Pressable,
   TouchableOpacity,
-  Alert,
 } from "react-native";
 import React, { useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import Validator from "email-validator";
-import firebase from "../../firebase";
 
-const LoginForm = ({ navigation }) => {
+const LoginForm = () => {
   const LoginFormSchema = Yup.object().shape({
     email: Yup.string().email().required("An email is required"),
     password: Yup.string()
       .required()
       .min(6, "Password must have at least 8 characters"),
   });
-
-  const onLogin = async (email, password) => {
-    try {
-      await firebase.auth().signInWithEmailAndPassword(email, password);
-      console.log("Logged In!", email, password);
-    } catch (error) {
-      Alert.alert(error.message);
-    }
-  };
   return (
     <View style={styles.wrapper}>
       <Formik
         initialValues={{ email: "", password: "" }}
         onSubmit={(values) => {
-          onLogin(values.email, values.password);
+          console.log(values);
         }}
         validationSchema={LoginFormSchema}
         validateOnMount={true}
@@ -104,7 +93,7 @@ const LoginForm = ({ navigation }) => {
 
             <View style={styles.signupContainer}>
               <Text>Don't have an account?</Text>
-              <TouchableOpacity onPress={() => navigation.push("SignupScreen")}>
+              <TouchableOpacity>
                 <Text style={{ color: "#6bb0e5" }}> Sign up</Text>
               </TouchableOpacity>
             </View>

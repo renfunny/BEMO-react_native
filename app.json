@@ -3,13 +3,10 @@
     "name": "blank",
     "slug": "blank",
     "version": "1.0.0",
-    "platforms": ["ios", "android", "web"],
-    "android": {
-      "googleServicesFile": "./google-services.json"
-    },
-    "ios": {
-      "googleServicesFile": "./GoogleService-Info.plist"
-    },
-    "plugins": ["@react-native-firebase/app"]
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ]
   }
 }
