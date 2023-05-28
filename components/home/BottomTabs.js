@@ -5,33 +5,37 @@ import { Divider } from "react-native-elements";
 
 export const bottomTabIcons = [
   {
-    name: "Home",
-    active: "https://img.icons8.com/fluency-systems-filled/60/ffffff/home.png",
-    inactive:
-      "https://img.icons8.com/fluency-systems-regular/60/ffffff/home.png",
-  },
-  {
     name: "Search",
-    active: "https://img.icons8.com/ios-filled/60/ffffff/search--v1.png",
-    inactive: "https://img.icons8.com/ios/60/ffffff/search--v1.png",
-  },
-  {
-    name: "Reels",
-    active: "https://img.icons8.com/ios-filled/50/ffffff/instagram-reel.png",
-    inactive: "https://img.icons8.com/ios/500/ffffff/instagram-reel.png",
+    active: "https://img.icons8.com/material-rounded/24/0033CC/camera--v1.png",
+    inactive:
+      "https://img.icons8.com/material-outlined/24/0033CC/camera--v1.png",
   },
   {
     name: "Shop",
     active:
-      "https://img.icons8.com/fluency-systems-filled/60/ffffff/shopping-bag-full.png",
+      "https://img.icons8.com/fluency-systems-filled/60/0033CC/shopping-bag-full.png",
     inactive:
-      "https://img.icons8.com/fluency-systems-regular/60/ffffff/shopping-bag-full.png",
+      "https://img.icons8.com/fluency-systems-regular/60/0033CC/shopping-bag-full.png",
+  },
+  {
+    name: "Home",
+    active: "https://img.icons8.com/fluency-systems-filled/60/0033CC/home.png",
+    inactive:
+      "https://img.icons8.com/fluency-systems-regular/60/0033CC/home.png",
+  },
+  {
+    name: "Reels",
+    active:
+      "https://img.icons8.com/ios-filled/50/0033CC/appointment-reminders--v1.png",
+    inactive:
+      "https://img.icons8.com/ios/50/0033CC/appointment-reminders--v1.png",
   },
   {
     name: "Profile",
-    active: "https://img.icons8.com/fluency-systems-filled/60/ffffff/user.png",
+    active:
+      "https://img.icons8.com/material-rounded/24/0033CC/user-group-man-man.png",
     inactive:
-      "https://img.icons8.com/fluency-systems-regular/60/ffffff/user.png",
+      "https://img.icons8.com/material-outlined/24/0033CC/user-group-man-man.png",
   },
 ];
 
@@ -42,13 +46,7 @@ const BottomTabs = ({ icons }) => {
     <TouchableOpacity onPress={() => setActiveTab(icon.name)}>
       <Image
         source={{ uri: activeTab === icon.name ? icon.active : icon.inactive }}
-        style={[
-          styles.icon,
-          icon.name === "Profile" ? styles.priofilePicture() : null,
-          activeTab === "Profile" && icon.name === activeTab
-            ? styles.priofilePicture(activeTab)
-            : null,
-        ]}
+        style={styles.icon}
       />
     </TouchableOpacity>
   );
@@ -83,10 +81,5 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
   },
-  priofilePicture: (activeTab = "") => ({
-    borderRadius: 50,
-    borderWidth: activeTab === "Profile" ? 2 : 0,
-    borderColor: "#fff",
-  }),
 });
 export default BottomTabs;
