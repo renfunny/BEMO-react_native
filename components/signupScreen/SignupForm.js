@@ -15,6 +15,7 @@ import { firebase, db } from "../../firebase";
 
 const SignupForm = ({ navigation }) => {
   const SignupFormSchema = Yup.object().shape({
+    name: Yup.string().required("A name is required").min(2, "Too Short!"),
     email: Yup.string().email().required("An email is required"),
     username: Yup.string().required().min(2, "Too Short!"),
     password: Yup.string()
@@ -28,7 +29,7 @@ const SignupForm = ({ navigation }) => {
     return data.results[0].picture.large;
   };
 
-  const onSignup = async (email, password, username) => {
+  const onSignup = async (name, email, password, username) => {
     try {
       const authUser = await firebase
         .auth()
@@ -39,9 +40,13 @@ const SignupForm = ({ navigation }) => {
         .doc(authUser.user.email)
         .set({
           owner_uid: authUser.user.uid,
+          name: name,
           username: username,
           email: authUser.user.email,
           profile_picture: await getRandomProfilePic(),
+          bio: "",
+          followers: [],
+          following: [],
         });
       console.log("Added to the database!");
     } catch (error) {
@@ -51,9 +56,9 @@ const SignupForm = ({ navigation }) => {
   return (
     <View style={styles.wrapper}>
       <Formik
-        initialValues={{ email: "", username: "", password: "" }}
+        initialValues={{ name: "", email: "", username: "", password: "" }}
         onSubmit={(values) => {
-          onSignup(values.email, values.password, values.username);
+          onSignup(values.name, values.email, values.password, values.username);
         }}
         validationSchema={SignupFormSchema}
         validateOnMount={true}
@@ -65,21 +70,21 @@ const SignupForm = ({ navigation }) => {
                 styles.inputField,
                 {
                   borderColor:
-                    values.email.length < 1 || Validator.validate(values.email)
+                    1 > values.name.length || values.name.length > 2
                       ? "#ccc"
                       : "red",
                 },
               ]}
             >
               <TextInput
+                placeholder="Full Name"
                 placeholderTextColor="#444"
-                placeholder="Email"
                 autoCapitalize="none"
-                keyboardType="email-address"
-                autoFocus={true}
-                onChangeText={handleChange("email")}
-                onBlur={handleBlur("email")}
-                value={values.email}
+                autoCorrect={false}
+                textContentType="name"
+                onChangeText={handleChange("name")}
+                onBlur={handleBlur("name")}
+                value={values.name}
               />
             </View>
 
@@ -102,6 +107,29 @@ const SignupForm = ({ navigation }) => {
                 onChangeText={handleChange("username")}
                 onBlur={handleBlur("username")}
                 value={values.username}
+              />
+            </View>
+
+            <View
+              style={[
+                styles.inputField,
+                {
+                  borderColor:
+                    values.email.length < 1 || Validator.validate(values.email)
+                      ? "#ccc"
+                      : "red",
+                },
+              ]}
+            >
+              <TextInput
+                placeholderTextColor="#444"
+                placeholder="Email"
+                autoCapitalize="none"
+                keyboardType="email-address"
+                autoFocus={true}
+                onChangeText={handleChange("email")}
+                onBlur={handleBlur("email")}
+                value={values.email}
               />
             </View>
 

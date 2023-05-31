@@ -28,7 +28,7 @@ const LoginForm = ({ navigation }) => {
     } catch (error) {
       Alert.alert(
         "Oh no!!!",
-        error.message + "\n\n What would you liek to do next?",
+        error.message + "\n\n What would you like to do next?",
         [
           {
             text: "Cancel",
@@ -68,7 +68,7 @@ const LoginForm = ({ navigation }) => {
             >
               <TextInput
                 placeholderTextColor="#444"
-                placeholder="Phone number, username or email"
+                placeholder="Email"
                 autoCapitalize="none"
                 keyboardType="email-address"
                 textContentType="emailAddress"
