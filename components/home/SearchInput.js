@@ -43,6 +43,8 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 20,
     width: 200,
+    borderColor: "black",
+    borderWidth: 1,
   },
   searchText: {
     paddingHorizontal: 5,

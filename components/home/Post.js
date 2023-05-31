@@ -1,6 +1,5 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import React, { useState, useEffect } from "react";
-import { POSTS } from "../../data/posts";
 import { Divider } from "react-native-elements";
 import { firebase, db } from "../../firebase";
 
@@ -8,23 +7,13 @@ const postFooterIcons = [
   {
     name: "Like",
     imageUrl:
-      "https://img.icons8.com/fluency-systems-regular/60/ffffff/like--v1.png",
-    likedImageUrl: "https://img.icons8.com/ios-filled/50/fa314a/like--v1.png",
+      "https://img.icons8.com/fluency-systems-regular/60/0033CC/like--v1.png",
+    likedImageUrl: "https://img.icons8.com/ios-filled/50/0033CC/like--v1.png",
   },
   {
     name: "Comment",
     imageUrl:
-      "https://img.icons8.com/fluency-systems-regular/60/ffffff/speech-bubble.png",
-  },
-  {
-    name: "Share",
-    imageUrl:
-      "https://img.icons8.com/fluency-systems-regular/60/ffffff/sent.png",
-  },
-  {
-    name: "Save",
-    imageUrl:
-      "https://img.icons8.com/fluency-systems-regular/60/ffffff/bookmark-ribbon.png",
+      "https://img.icons8.com/fluency-systems-regular/60/0033CC/speech-bubble.png",
   },
 ];
 
@@ -61,7 +50,7 @@ const Post = ({ post }) => {
       <PostImage post={post} />
       <View style={{ marginHorizontal: 15, marginTop: 10 }}>
         <PostFooter post={post} handleLike={handleLike} />
-        <Likes post={post} />
+        {/* <Likes post={post} /> */}
         <Caption post={post} />
         <CommentSection post={post} />
         <Comments post={post} />
@@ -80,19 +69,24 @@ const PostHeader = ({ post }) => (
     }}
   >
     <View style={{ flexDirection: "row", alignItems: "center" }}>
-      <Image source={{ uri: post.profile_pic }} style={styles.story} />
-      <Text style={{ color: "white", marginLeft: 5, fontWeight: 700 }}>
+      <Image source={{ uri: post.profile_picture }} style={styles.story} />
+      <Text style={{ color: "black", marginLeft: 5, fontWeight: 700 }}>
         {post.user}
       </Text>
     </View>
     <View>
-      <Text style={{ color: "white", fontWeight: "900" }}>...</Text>
+      <Image
+        source={{
+          uri: "https://img.icons8.com/ios/50/0033CC/price-tag--v1.png",
+        }}
+        style={styles.footerIcon}
+      />
     </View>
   </View>
 );
 
 const PostImage = ({ post }) => (
-  <View style={{ width: "100%", height: 450 }}>
+  <View style={{ width: "100%", height: 600, paddingHorizontal: "0.5rem" }}>
     <Image
       source={{ uri: post.imageUrl }}
       style={{ height: "100%", resizeMode: "cover" }}
@@ -101,7 +95,7 @@ const PostImage = ({ post }) => (
 );
 
 const PostFooter = ({ handleLike, post }) => (
-  <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+  <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
     <View style={styles.leftFooterIconsContainer}>
       <TouchableOpacity onPress={() => handleLike(post)}>
         <Image
@@ -114,13 +108,6 @@ const PostFooter = ({ handleLike, post }) => (
         />
       </TouchableOpacity>
       <Icon imgStyle={styles.footerIcon} imgUrl={postFooterIcons[1].imageUrl} />
-      <Icon
-        imgStyle={[styles.footerIcon, styles.shareIcon]}
-        imgUrl={postFooterIcons[2].imageUrl}
-      />
-    </View>
-    <View>
-      <Icon imgStyle={styles.footerIcon} imgUrl={postFooterIcons[3].imageUrl} />
     </View>
   </View>
 );
@@ -131,17 +118,24 @@ const Icon = ({ imgStyle, imgUrl }) => (
   </TouchableOpacity>
 );
 
-const Likes = ({ post }) => (
-  <View style={{ flexDirection: "row", marginTop: 4 }}>
-    <Text style={{ color: "white", fontWeight: 600 }}>
-      {post.likes_by_users.length.toLocaleString("en")} likes
-    </Text>
-  </View>
-);
+// const Likes = ({ post }) => (
+//   <View
+//     style={{
+//       flexDirection: "row",
+//       marginTop: 4,
+//       justifyContent: "flex-end",
+//       marginRight: 40,
+//     }}
+//   >
+//     <Text style={{ color: "black", fontWeight: 600 }}>
+//       {post.likes_by_users.length.toLocaleString("en")} likes
+//     </Text>
+//   </View>
+// );
 
 const Caption = ({ post }) => (
-  <View style={{ marginTop: 5 }}>
-    <Text style={{ color: "white" }}>
+  <View style={{ marginTop: -25 }}>
+    <Text style={{ color: "black" }}>
       <Text style={{ fontWeight: 600 }}>{post.user}</Text>
       <Text> {post.caption}</Text>
     </Text>
@@ -163,7 +157,7 @@ const Comments = ({ post }) => (
   <>
     {post.comments.map((comment, index) => (
       <View key={index} style={{ flexDirection: "row", marginTop: 5 }}>
-        <Text style={{ color: "white" }}>
+        <Text style={{ color: "black" }}>
           <Text style={{ fontWeight: 600 }}>{comment.user}</Text>{" "}
           {comment.comment}
         </Text>
@@ -179,7 +173,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     marginLeft: 6,
     borderWidth: 1.6,
-    borderColor: "white",
+    borderColor: "black",
   },
   footerIcon: {
     width: 33,
@@ -188,11 +182,8 @@ const styles = StyleSheet.create({
   leftFooterIconsContainer: {
     flexDirection: "row",
     width: "32%",
-    justifyContent: "space-between",
-  },
-  shareIcon: {
-    transform: [{ rotate: "320deg" }],
-    marginTop: -3,
+    justifyContent: "flex-end",
+    gap: 10,
   },
 });
 
