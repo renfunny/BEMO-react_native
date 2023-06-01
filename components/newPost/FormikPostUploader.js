@@ -1,26 +1,47 @@
-import { View, Text, TextInput, Image, Button } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  Image,
+  Button,
+  TouchableOpacity,
+  Keyboard,
+  Platform,
+} from "react-native";
 import { useState, useEffect } from "react";
 import React from "react";
 import * as Yup from "yup";
 import { Formik } from "formik";
 import { Divider } from "react-native-elements";
 import validUrl from "valid-url";
-import { firebase, db } from "../../firebase";
+import { firebase, db, storage } from "../../firebase";
+import * as ImagePicker from "expo-image-picker";
 
 const PLACEHOLDER_IMAGE =
-  "https://us-tuna-sounds-images.voicemod.net/83cf4323-16bb-4aca-895e-019c1d748381-1681607929918.jpg";
-
-const uploadPostSchema = Yup.object().shape({
-  imageUrl: Yup.string().required("Image URL is required"),
-  caption: Yup.string().max(
-    2200,
-    "Caption has reached the maximum character limit"
-  ),
-});
+  "https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg";
 
 const FormikPostUploader = ({ navigation }) => {
-  const [thumbnailUrl, setThumbnailUrl] = useState(PLACEHOLDER_IMAGE);
+  const [thumbnailUrl, setThumbnailUrl] = useState(null);
+  const [isLoading, toggleLoading] = useState(false);
   const [currentLoggedInUser, setCurrentLoggedInUser] = useState(null);
+  const currentUser = firebase.auth().currentUser;
+
+  const uploadPostSchema = Yup.object().shape({
+    caption: Yup.string().max(
+      2200,
+      "Caption has reached the maximum character limit"
+    ),
+  });
+
+  const getImageFromRoll = async () => {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: false,
+    });
+    if (!result.canceled) {
+      setThumbnailUrl(result.assets[0].uri);
+    }
+  };
 
   const getUsername = () => {
     const user = firebase.auth().currentUser;
@@ -43,44 +64,78 @@ const FormikPostUploader = ({ navigation }) => {
     getUsername();
   }, []);
 
-  const uploadPostToFirebase = (imageUrl, caption) => {
-    const unsubscribe = db
-      .collection("users")
+  const uploadPost = async (caption) => {
+    toggleLoading(true);
+    const blob = await new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+
+      xhr.onload = () => {
+        resolve(xhr.response);
+      };
+
+      xhr.onerror = (e) => {
+        reject(new TypeError("Network request failed."));
+      };
+
+      xhr.responseType = "blob";
+      xhr.open("GET", thumbnailUrl, true);
+      xhr.send(null);
+    });
+    const ref = storage
+      .ref()
+      .child(
+        `${currentUser.uid} ${
+          currentLoggedInUser.username
+        } ${new Date().toISOString()}`
+      );
+    console.log(firebase.auth().currentUser.email);
+
+    const snapshot = await ref.put(blob);
+
+    db.collection("users")
       .doc(firebase.auth().currentUser.email)
       .collection("posts")
       .add({
-        imageUrl: imageUrl,
         user: currentLoggedInUser.username,
+        imageUrl: await snapshot.ref.getDownloadURL(),
         profile_picture: currentLoggedInUser.profilePicture,
         owner_uid: firebase.auth().currentUser.uid,
         owner_email: firebase.auth().currentUser.email,
-        caption: caption,
+        caption,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
         likes_by_users: [],
-        comments: [],
       })
-      .then(() => navigation.goBack());
+      .then(() => {
+        console.log("here");
 
-    return unsubscribe;
+        Keyboard.dismiss();
+        toggleLoading(false);
+        navigation.goBack();
+      });
   };
+
+  useEffect(() => {
+    (async () => {
+      if (Platform.OS !== "web") {
+        const { status } =
+          await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== "granted") {
+          alert("We need access to photos and media on your device.");
+        }
+      }
+    })();
+  }, []);
 
   return (
     <Formik
-      initialValues={{ caption: "", imageUrl: "" }}
+      initialValues={{ caption: "" }}
       onSubmit={(values) => {
-        uploadPostToFirebase(values.imageUrl, values.caption);
+        uploadPost(values.caption);
       }}
       validationSchema={uploadPostSchema}
       validateOnMount={true}
     >
-      {({
-        handleBlur,
-        handleChange,
-        handleSubmit,
-        values,
-        errors,
-        isValid,
-      }) => (
+      {({ handleBlur, handleChange, handleSubmit, values, isValid }) => (
         <>
           <View
             style={{
@@ -97,10 +152,10 @@ const FormikPostUploader = ({ navigation }) => {
               }}
               style={{ width: 100, height: 100 }}
             />
-            <View style={{ flex: 1, marginLeft: 5 }}>
+            <View style={{ flex: 1, marginLeft: 12 }}>
               <TextInput
                 placeholder="Write a caption..."
-                placeholderTextColor={"gray"}
+                placeholderTextColor="gray"
                 multiline={true}
                 style={{ color: "white", fontSize: 20 }}
                 onChangeText={handleChange("caption")}
@@ -110,22 +165,42 @@ const FormikPostUploader = ({ navigation }) => {
             </View>
           </View>
           <Divider width={0.2} orientation="vertical" />
-          <TextInput
-            onChange={(e) => setThumbnailUrl(e.nativeEvent.text)}
-            placeholder="Enter Image Url..."
-            placeholderTextColor={"gray"}
-            style={{ color: "white", fontSize: 18 }}
-            onChangeText={handleChange("imageUrl")}
-            onBlur={handleBlur("imageUrl")}
-            value={values.imageUrl}
-          />
-          {errors.imageUrl && (
-            <Text style={{ fontSize: 10, color: "red" }}>
-              {errors.imageUrl}
-            </Text>
-          )}
-
-          <Button onPress={handleSubmit} title="Share" disabled={!isValid} />
+          <TouchableOpacity
+            style={{
+              backgroundColor: "#1f75fe",
+              marginTop: 10,
+              height: 40,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            onPress={getImageFromRoll}
+          >
+            <Text style={{ fontSize: 18, color: "white" }}>Upload Image</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              backgroundColor: !isValid ? "gray" : "#1f75fe",
+              marginTop: 20,
+            }}
+          >
+            <Button
+              onPress={handleSubmit}
+              title="SHARE"
+              disabled={!isValid}
+              color="white"
+            />
+          </TouchableOpacity>
+          <View style={{ width: "100%", alignItems: "center", marginTop: 20 }}>
+            {isLoading && (
+              <Image
+                source={{
+                  uri: "https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif",
+                  height: 30,
+                  width: 30,
+                }}
+              />
+            )}
+          </View>
         </>
       )}
     </Formik>

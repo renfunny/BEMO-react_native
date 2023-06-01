@@ -2,6 +2,7 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import React, { useState, useEffect } from "react";
 import { Divider } from "react-native-elements";
 import { firebase, db } from "../../firebase";
+import { useNavigation } from "@react-navigation/core";
 
 const postFooterIcons = [
   {
@@ -17,7 +18,32 @@ const postFooterIcons = [
   },
 ];
 
-const Post = ({ post }) => {
+const Post = ({ post, index }) => {
+  const navigation = useNavigation();
+  const [comments, setComments] = useState([]);
+
+  const getComments = () => {
+    db.collection("users")
+      .doc(post.owner_email)
+      .collection("posts")
+      .doc(post.id)
+      .collection("comments")
+      .onSnapshot((snapshot) => {
+        setComments(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            comment: doc.data().comment,
+            user: doc.data().user,
+            userImage: doc.data().userImage,
+          }))
+        );
+      });
+  };
+
+  useEffect(() => {
+    getComments();
+  }, []);
+
   const handleLike = (post) => {
     const currentLikeStatus = !post.likes_by_users.includes(
       firebase.auth().currentUser.email
@@ -46,14 +72,22 @@ const Post = ({ post }) => {
   return (
     <View style={{ marginBottom: 30 }}>
       <Divider width={1} orientation="vertical" />
-      <PostHeader post={post} />
+      <PostHeader post={post} navigation={navigation} />
       <PostImage post={post} />
       <View style={{ marginHorizontal: 15, marginTop: 10 }}>
-        <PostFooter post={post} handleLike={handleLike} />
+        <PostFooter
+          post={post}
+          navigation={navigation}
+          handleLike={handleLike}
+        />
         {/* <Likes post={post} /> */}
         <Caption post={post} />
-        <CommentSection post={post} />
-        <Comments post={post} />
+        <CommentSection
+          post={post}
+          comments={comments}
+          navigation={navigation}
+        />
+        <Comments comments={comments} />
       </View>
     </View>
   );
@@ -94,7 +128,7 @@ const PostImage = ({ post }) => (
   </View>
 );
 
-const PostFooter = ({ handleLike, post }) => (
+const PostFooter = ({ handleLike, post, navigation }) => (
   <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
     <View style={styles.leftFooterIconsContainer}>
       <TouchableOpacity onPress={() => handleLike(post)}>
@@ -107,7 +141,14 @@ const PostFooter = ({ handleLike, post }) => (
           }}
         />
       </TouchableOpacity>
-      <Icon imgStyle={styles.footerIcon} imgUrl={postFooterIcons[1].imageUrl} />
+      <TouchableOpacity
+        onPress={() => navigation.navigate("CommentsScreen", { post })}
+      >
+        <Image
+          style={styles.footerIcon}
+          source={{ uri: postFooterIcons[1].imageUrl }}
+        />
+      </TouchableOpacity>
     </View>
   </View>
 );
@@ -142,27 +183,55 @@ const Caption = ({ post }) => (
   </View>
 );
 
-const CommentSection = ({ post }) => (
+const CommentSection = ({ post, comments, navigation }) => (
   <View style={{ marginTop: 5 }}>
-    {!!post.comments.length && (
-      <Text style={{ color: "gray" }}>
-        View{post.comments.length > 1 ? " all" : ""} {post.comments.length}{" "}
-        {post.comments.length > 1 ? "comments" : "comment"}
+    {!!comments.length && (
+      <Text
+        onPress={() =>
+          navigation.navigate("CommentsScreen", { postData: post })
+        }
+        style={{ color: "gray" }}
+      >
+        View{comments.length > 1 ? " all" : ""} {comments.length}{" "}
+        {comments.length > 1 ? "comments" : "comment"}
       </Text>
     )}
   </View>
 );
 
-const Comments = ({ post }) => (
+const Comments = ({ comments }) => (
   <>
-    {post.comments.map((comment, index) => (
-      <View key={index} style={{ flexDirection: "row", marginTop: 5 }}>
-        <Text style={{ color: "black" }}>
-          <Text style={{ fontWeight: 600 }}>{comment.user}</Text>{" "}
-          {comment.comment}
-        </Text>
-      </View>
-    ))}
+    {!!comments.length ? (
+      <>
+        {comments?.length <= 2 ? (
+          <>
+            {comments?.map((comment, index) => (
+              <View key={index} style={{ flexDirection: "row", marginTop: 5 }}>
+                <Text style={{ color: "white" }}>
+                  <Text style={{ fontWeight: "600" }}>{comment.user}</Text>
+                  <Text> {comment.comment}</Text>
+                </Text>
+              </View>
+            ))}
+          </>
+        ) : (
+          <>
+            <View style={{ flexDirection: "row", marginTop: 5 }}>
+              <Text style={{ color: "white" }}>
+                <Text style={{ fontWeight: "600" }}>{comments[0]?.user}</Text>
+                <Text> {comments[0]?.comment}</Text>
+              </Text>
+            </View>
+            <View style={{ flexDirection: "row", marginTop: 5 }}>
+              <Text style={{ color: "white" }}>
+                <Text style={{ fontWeight: "600" }}>{comments[1]?.user}</Text>
+                <Text> {comments[1]?.comment}</Text>
+              </Text>
+            </View>
+          </>
+        )}
+      </>
+    ) : null}
   </>
 );
 
