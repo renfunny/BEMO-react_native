@@ -70,14 +70,16 @@ const Post = ({ post, index }) => {
       });
   };
   return (
-    <View style={{ marginBottom: 30 }}>
-      <Divider width={1} orientation="vertical" />
-      <PostHeader post={post} navigation={navigation} />
+    <View style={{ marginBottom: 15 }}>
+      {index == 0 ? (
+        <Divider width={1} orientation="horizontal" color="#303030" />
+      ) : null}
+      <PostHeader navigation={navigation} post={post} />
       <PostImage post={post} />
-      <View style={{ marginHorizontal: 15, marginTop: 10 }}>
+      <View style={{ marginHorizontal: 15, marginTop: 15 }}>
         <PostFooter
-          post={post}
           navigation={navigation}
+          post={post}
           handleLike={handleLike}
         />
         {/* <Likes post={post} /> */}
@@ -142,7 +144,9 @@ const PostFooter = ({ handleLike, post, navigation }) => (
         />
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => navigation.navigate("CommentsScreen", { post })}
+        onPress={() =>
+          navigation.navigate("CommentsScreen", { postData: post })
+        }
       >
         <Image
           style={styles.footerIcon}
