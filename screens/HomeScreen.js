@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import Header from "../components/home/Header";
 import SearchBar from "../components/home/SearchBar";
 import Post from "../components/home/Post";
-import BottomTabs, { bottomTabIcons } from "../components/home/BottomTabs";
 import { db } from "../firebase";
 
 const HomeScreen = ({ navigation }) => {
@@ -22,12 +21,14 @@ const HomeScreen = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <Header navigation={navigation} />
       <SearchBar />
-      <ScrollView>
+      <ScrollView
+        style={{ marginBottom: 30 }}
+        showsVerticalScrollIndicator={false}
+      >
         {posts.map((post, index) => (
           <Post post={post} key={index} index={index} />
         ))}
       </ScrollView>
-      <BottomTabs icons={bottomTabIcons} />
     </SafeAreaView>
   );
 };
