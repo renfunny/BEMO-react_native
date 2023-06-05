@@ -70,7 +70,7 @@ const Post = ({ post, index }) => {
       });
   };
   return (
-    <View style={{ marginBottom: 15 }}>
+    <View style={{ marginBottom: 35 }}>
       {index == 0 ? (
         <Divider width={1} orientation="horizontal" color="#303030" />
       ) : null}
@@ -95,7 +95,7 @@ const Post = ({ post, index }) => {
   );
 };
 //Post Components
-const PostHeader = ({ post }) => (
+const PostHeader = ({ post, navigation }) => (
   <View
     style={{
       flexDirection: "row",
@@ -106,7 +106,12 @@ const PostHeader = ({ post }) => (
   >
     <View style={{ flexDirection: "row", alignItems: "center" }}>
       <Image source={{ uri: post.profile_picture }} style={styles.story} />
-      <Text style={{ color: "black", marginLeft: 5, fontWeight: 700 }}>
+      <Text
+        style={{ color: "black", marginLeft: 5, fontWeight: 700 }}
+        onPress={() =>
+          navigation.navigate("AccountScreen", { email: post.owner_email })
+        }
+      >
         {post.user}
       </Text>
     </View>

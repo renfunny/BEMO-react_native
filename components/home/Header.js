@@ -29,7 +29,7 @@ const Header = ({ navigation }) => {
         />
       </TouchableOpacity>
 
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.push("AccountScreen")}>
         <Image
           source={{
             uri: "https://img.icons8.com/fluency-systems-regular/60/0033CC/user.png",
