@@ -1,10 +1,11 @@
 import { View, Text } from "react-native";
 import React from "react";
+import StoreHeader from "../components/storeScreen/StoreHeader";
 
-const StoreScreen = () => {
+const StoreScreen = ({ navigation }) => {
   return (
     <View>
-      <Text>StoreScreen</Text>
+      <StoreHeader navigation={navigation} />
     </View>
   );
 };

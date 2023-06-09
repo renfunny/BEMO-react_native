@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 import { Icon } from "react-native-elements/dist/icons/Icon";
 import { db } from "../../firebase";
 
-const Header = ({ email }) => {
+const Header = ({ email, navigation }) => {
   const [username, setUsername] = useState("");
 
   useEffect(() => {

@@ -1,10 +1,4 @@
-import {
-  View,
-  TextInput,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
+import { View, Image, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 import SearchInput from "./SearchInput";
 
@@ -39,6 +33,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     marginHorizontal: 5,
+    marginBottom: 10,
   },
   logo: {
     width: 100,

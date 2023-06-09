@@ -1,6 +1,6 @@
 import { SafeAreaView } from "react-native";
 import React from "react";
-import ShowNotifications from "../components/notifications/ShowNotifications";
+import ShowNotifications from "../components/notificationsScreen/ShowNotifications";
 
 const NotificationsScreen = ({ navigation }) => {
   return (

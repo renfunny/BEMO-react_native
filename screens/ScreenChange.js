@@ -8,7 +8,7 @@ import StoreScreen from "./StoreScreen";
 import FriendsScreen from "./FriendsScreen";
 
 const ScreenChange = ({ navigation }) => {
-  const [component, setComponent] = useState("HomeScreen");
+  const [component, setComponent] = useState("StoreScreen");
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       {component === "HomeScreen" ? (
@@ -22,7 +22,7 @@ const ScreenChange = ({ navigation }) => {
         </>
       ) : component === "StoreScreen" ? (
         <>
-          <StoreScreen />
+          <StoreScreen navigation={navigation} />
           <BottomTabs
             icons={bottomTabIcons}
             setComponent={setComponent}

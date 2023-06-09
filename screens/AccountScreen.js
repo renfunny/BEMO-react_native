@@ -37,7 +37,7 @@ const AccountScreen = ({ navigation, route }) => {
   }, []);
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "black" }}>
-      <Header email={email} />
+      <Header email={email} navigation={navigation} />
       <AccountInfo email={email} />
       <View style={{ flexDirection: "row", flexWrap: 1, marginTop: 20 }}>
         {posts?.map((post, index) => (

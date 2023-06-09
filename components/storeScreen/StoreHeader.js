@@ -1,6 +1,6 @@
-import { View, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity, Image, StyleSheet } from "react-native";
 import React from "react";
-import { firebase } from "../../firebase";
+import SearchInput from "../home/SearchInput";
 
 const handleSignout = async () => {
   try {
@@ -10,6 +10,13 @@ const handleSignout = async () => {
     console.log(error.message);
   }
 };
+
+const StoreHeader = ({ navigation }) => (
+  <View>
+    <Header navigation={navigation} />
+    <SearchBar />
+  </View>
+);
 
 const Header = ({ navigation }) => {
   return (
@@ -41,12 +48,49 @@ const Header = ({ navigation }) => {
   );
 };
 
+const SearchBar = () => {
+  return (
+    <View style={styles.searchContainer}>
+      <TouchableOpacity>
+        <Image
+          source={{
+            uri: "https://img.icons8.com/ios-filled/50/0033CC/long-arrow-left.png",
+          }}
+          style={styles.icon}
+        />
+      </TouchableOpacity>
+      <SearchInput />
+
+      <TouchableOpacity>
+        <Image
+          source={{
+            uri: "https://img.icons8.com/material-rounded/24/0033CC/user-group-man-man.png",
+          }}
+          style={styles.icon}
+        />
+      </TouchableOpacity>
+    </View>
+  );
+};
+
 const styles = StyleSheet.create({
   container: {
     justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",
     marginHorizontal: 5,
+  },
+  headerContainer: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
+  },
+  searchContainer: {
+    justifyContent: "space-between",
+    alignItems: "center",
+    flexDirection: "row",
+    marginHorizontal: 5,
+    marginBottom: 10,
   },
   logo: {
     width: 100,
@@ -62,4 +106,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Header;
+export default StoreHeader;
