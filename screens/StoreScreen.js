@@ -39,6 +39,7 @@ const StoreScreen = ({ navigation }) => {
             flexDirection: "row",
             flexWrap: "wrap",
             justifyContent: "space-around",
+            paddingBottom: 50,
           }}
         >
           {posts.map((post, index) => (

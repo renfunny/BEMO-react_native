@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
   },
   searchResults: {
     position: "absolute",
-    top: 26, // Adjust this value based on your layout
+    top: 26,
     left: 0,
     right: 0,
     zIndex: 999,

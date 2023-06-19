@@ -8,7 +8,7 @@ import StoreScreen from "./StoreScreen";
 import FriendsScreen from "./FriendsScreen";
 
 const ScreenChange = ({ navigation }) => {
-  const [component, setComponent] = useState("StoreScreen");
+  const [component, setComponent] = useState("HomeScreen");
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       {component === "HomeScreen" ? (

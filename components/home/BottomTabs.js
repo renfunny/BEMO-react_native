@@ -67,7 +67,7 @@ const Icon = ({ icon, component, setComponent }) => (
 
 const styles = StyleSheet.create({
   wrapper: {
-    position: "absolute",
+    position: "fixed",
     left: 0,
     right: 0,
     bottom: 0,

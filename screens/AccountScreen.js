@@ -21,7 +21,7 @@ const AccountScreen = ({ navigation, route }) => {
       .collection("users")
       .doc(email)
       .collection("posts")
-      .orderBy("craetedAt", "desc")
+      .orderBy("createdAt", "desc")
       .onSnapshot((snapshot) => {
         setPosts(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
       });
@@ -36,7 +36,7 @@ const AccountScreen = ({ navigation, route }) => {
     return () => (mounted = false);
   }, []);
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "black" }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       <Header email={email} navigation={navigation} />
       <AccountInfo email={email} />
       <View style={{ flexDirection: "row", flexWrap: 1, marginTop: 20 }}>
@@ -47,6 +47,7 @@ const AccountScreen = ({ navigation, route }) => {
               navigation.navigate("PostScreen", {
                 createdAt: post.createdAt,
                 username: post.user,
+                email: post.owner_email,
               })
             }
           >

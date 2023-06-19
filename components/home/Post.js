@@ -71,9 +71,7 @@ const Post = ({ post, index }) => {
   };
   return (
     <View style={{ marginBottom: 35 }}>
-      {index == 0 ? (
-        <Divider width={1} orientation="horizontal" color="#303030" />
-      ) : null}
+      {index == 0 ? <Divider width={1} orientation="horizontal" /> : null}
       <PostHeader navigation={navigation} post={post} />
       <PostImage post={post} />
       <View style={{ marginHorizontal: 15, marginTop: 15 }}>
@@ -137,7 +135,7 @@ const PostImage = ({ post }) => (
 
 const PostFooter = ({ handleLike, post, navigation }) => (
   <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
-    <View style={styles.leftFooterIconsContainer}>
+    <View style={styles.rightFooterIconsContainer}>
       <TouchableOpacity onPress={() => handleLike(post)}>
         <Image
           style={styles.footerIcon}
@@ -184,7 +182,7 @@ const Icon = ({ imgStyle, imgUrl }) => (
 // );
 
 const Caption = ({ post }) => (
-  <View style={{ marginTop: -25 }}>
+  <View style={{ marginTop: -25, width: "50%" }}>
     <Text style={{ color: "black" }}>
       <Text style={{ fontWeight: 600 }}>{post.user}</Text>
       <Text> {post.caption}</Text>
@@ -257,7 +255,7 @@ const styles = StyleSheet.create({
     width: 33,
     height: 33,
   },
-  leftFooterIconsContainer: {
+  rightFooterIconsContainer: {
     flexDirection: "row",
     width: "32%",
     justifyContent: "flex-end",

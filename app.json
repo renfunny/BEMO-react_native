@@ -3,10 +3,14 @@
     "name": "blank",
     "slug": "blank",
     "version": "1.0.0",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
+    "platforms": ["ios", "android", "web"],
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow BEMO to access your camera."
+        }
+      ]
     ]
   }
 }

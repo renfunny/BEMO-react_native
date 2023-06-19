@@ -21,13 +21,13 @@ const Header = ({ email, navigation }) => {
           flexDirection: "row",
           justifyContent: "space-between",
           alignItems: "center",
-          paddingBottom: 5,
+          paddingVertical: 10,
         }}
       >
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Image
             source={{
-              uri: "https://img.icons8.com/ios-glyphs/90/ffffff/back.png",
+              uri: "https://img.icons8.com/ios-glyphs/90/0033CC/back.png",
             }}
             style={{ width: 30, height: 30 }}
           />
@@ -35,7 +35,7 @@ const Header = ({ email, navigation }) => {
         <View style={{ marginLeft: 35 }}>
           <Text
             style={{
-              color: "white",
+              color: "black",
               fontWeight: "900",
               fontSize: 16,
               textAlign: "center",
@@ -52,12 +52,12 @@ const Header = ({ email, navigation }) => {
           }}
         >
           <TouchableOpacity>
-            <Icon type="feather" name="bell" size={24} color="white" />
+            <Icon type="feather" name="bell" size={24} color="#0033CC" />
           </TouchableOpacity>
           <TouchableOpacity style={{ marginLeft: 25 }}>
             <Image
               source={{
-                uri: "https://img.icons8.com/ios-glyphs/30/ffffff/ellipsis.png",
+                uri: "https://img.icons8.com/ios-glyphs/30/0033CC/ellipsis.png",
               }}
               style={{ width: 15, height: 15, resizeMode: "contain" }}
             />

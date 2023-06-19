@@ -105,7 +105,7 @@ const CommentsScreen = ({ route }) => {
     >
       <SafeAreaView style={styles.container}>
         <Header navigation={navigation} />
-        <Divider width={1} color="#303030" />
+        <Divider width={1} />
         <ScrollView showsVerticalScrollIndicator={false}>
           <View
             style={{ flexDirection: "row", padding: 10, alignItems: "center" }}
@@ -121,14 +121,14 @@ const CommentsScreen = ({ route }) => {
             />
             <View>
               <Text>
-                <Text style={{ color: "white", fontWeight: "800" }}>
+                <Text style={{ color: "black", fontWeight: "800" }}>
                   {post?.username}
                 </Text>
-                <Text style={{ color: "white" }}> {post?.caption}</Text>
+                <Text style={{ color: "black" }}> {post?.caption}</Text>
               </Text>
             </View>
           </View>
-          <Divider width={1} color="#303030" />
+          <Divider width={1} />
           {comments && (
             <>
               {comments?.map((comment) => (
@@ -151,10 +151,10 @@ const CommentsScreen = ({ route }) => {
                   />
                   <View>
                     <Text>
-                      <Text style={{ color: "white", fontWeight: "800" }}>
+                      <Text style={{ color: "black", fontWeight: "800" }}>
                         {comment.user}
                       </Text>
-                      <Text style={{ color: "white" }}> {comment.comment}</Text>
+                      <Text style={{ color: "black" }}> {comment.comment}</Text>
                     </Text>
                   </View>
                 </View>
@@ -166,7 +166,7 @@ const CommentsScreen = ({ route }) => {
           style={{
             position: "absolute",
             bottom: 0,
-            backgroundColor: "black",
+            backgroundColor: "white",
             paddingBottom: 30,
             paddingHorizontal: 20,
             paddingTop: 20,
@@ -216,7 +216,7 @@ const Header = ({ navigation }) => (
   <View style={styles.headerContainer}>
     <TouchableOpacity onPress={() => navigation.goBack()}>
       <Image
-        source={{ uri: "https://img.icons8.com/ios-glyphs/90/ffffff/back.png" }}
+        source={{ uri: "https://img.icons8.com/ios-glyphs/90/0033CC/back.png" }}
         style={{ width: 30, height: 30 }}
       />
     </TouchableOpacity>
@@ -228,17 +228,17 @@ const Header = ({ navigation }) => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "black",
+    backgroundColor: "white",
     paddingHorizontal: 10,
   },
   headerContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingBottom: 10,
+    paddingVertical: 10,
   },
   headerText: {
-    color: "white",
+    color: "black",
     fontWeight: "700",
     fontSize: 18,
     marginRight: 25,

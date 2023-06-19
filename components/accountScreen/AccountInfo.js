@@ -201,14 +201,14 @@ const Bottom = ({
   navigation,
 }) => (
   <View style={styles.bottomContainer}>
-    <Text style={{ color: "white", fontWeight: "800" }}>{user?.name}</Text>
-    <Text style={{ color: "white", paddingBottom: 8 }}>{user?.bio}</Text>
+    <Text style={{ color: "black", fontWeight: "800" }}>{user?.name}</Text>
+    <Text style={{ color: "black", paddingBottom: 8 }}>{user?.bio}</Text>
     {loggedInUser?.username == user?.username ? (
       <Pressable
         onPress={() => navigation.navigate("EditScreen")}
         style={styles.editButton}
       >
-        <Text style={{ color: "white", fontWeight: "800", fontSize: 14 }}>
+        <Text style={{ color: "black", fontWeight: "800", fontSize: 14 }}>
           Edit Profile
         </Text>
       </Pressable>
@@ -219,7 +219,7 @@ const Bottom = ({
             onPress={() => unfollowUser(user.email)}
             style={styles.editButton}
           >
-            <Text style={{ color: "white", fontWeight: "800", fontSize: 14 }}>
+            <Text style={{ color: "black", fontWeight: "800", fontSize: 14 }}>
               Following
             </Text>
           </Pressable>
@@ -228,7 +228,7 @@ const Bottom = ({
             onPress={() => followUser(user.email)}
             style={[styles.editButton, { backgroundColor: "#0095f6" }]}
           >
-            <Text style={{ color: "white", fontWeight: "800", fontSize: 14 }}>
+            <Text style={{ color: "black", fontWeight: "800", fontSize: 14 }}>
               Follow
             </Text>
           </Pressable>
@@ -263,7 +263,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 0,
     right: -2,
-    borderWidth: 4,
+    borderWidth: 2,
   },
   addToStoryImage: {
     width: 14,
@@ -278,12 +278,12 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   infoAmount: {
-    color: "white",
+    color: "black",
     fontSize: 18,
     fontWeight: "800",
   },
   infoTitle: {
-    color: "white",
+    color: "black",
     fontSize: 14,
     fontWeight: "600",
   },

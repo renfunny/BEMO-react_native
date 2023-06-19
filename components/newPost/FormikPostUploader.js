@@ -157,7 +157,7 @@ const FormikPostUploader = ({ navigation }) => {
                 placeholder="Write a caption..."
                 placeholderTextColor="gray"
                 multiline={true}
-                style={{ color: "white", fontSize: 20 }}
+                style={{ color: "black", fontSize: 20 }}
                 onChangeText={handleChange("caption")}
                 onBlur={handleBlur("caption")}
                 value={values.caption}
@@ -187,7 +187,7 @@ const FormikPostUploader = ({ navigation }) => {
               onPress={handleSubmit}
               title="SHARE"
               disabled={!isValid}
-              color="white"
+              color="#0033CC"
             />
           </TouchableOpacity>
           <View style={{ width: "100%", alignItems: "center", marginTop: 20 }}>

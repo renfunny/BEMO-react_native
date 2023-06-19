@@ -11,6 +11,7 @@ import ScreenChange from "./screens/ScreenChange";
 import FriendsScreen from "./screens/FriendsScreen";
 import StoreScreen from "./screens/StoreScreen";
 import AccountScreen from "./screens/AccountScreen";
+import PostScreen from "./screens/PostScreen";
 
 const Stack = createStackNavigator();
 
@@ -26,6 +27,7 @@ export const SignedInStack = () => (
     >
       <Stack.Screen name="ScreenChange" component={ScreenChange} />
       <Stack.Screen name="AccountScreen" component={AccountScreen} />
+      <Stack.Screen name="PostScreen" component={PostScreen} />
       <Stack.Screen name="StoreScreen" component={StoreScreen} />
       <Stack.Screen name="FriendsScreen" component={FriendsScreen} />
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
