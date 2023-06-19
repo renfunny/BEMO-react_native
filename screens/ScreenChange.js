@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView } from "react-native";
+import { SafeAreaView } from "react-native";
 import React, { useState } from "react";
 import HomeScreen from "./HomeScreen";
 import BottomTabs from "../components/home/BottomTabs";

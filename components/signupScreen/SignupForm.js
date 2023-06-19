@@ -17,6 +17,7 @@ const SignupForm = ({ navigation }) => {
   const SignupFormSchema = Yup.object().shape({
     name: Yup.string().required("A name is required").min(2, "Too Short!"),
     email: Yup.string().email().required("An email is required"),
+    bio: Yup.string().max(100, "Too Long!"),
     username: Yup.string().required().min(2, "Too Short!"),
     password: Yup.string()
       .required()
@@ -29,7 +30,7 @@ const SignupForm = ({ navigation }) => {
     return data.results[0].picture.large;
   };
 
-  const onSignup = async (name, email, password, username) => {
+  const onSignup = async (name, email, password, username, bio) => {
     try {
       const authUser = await firebase
         .auth()
@@ -44,7 +45,7 @@ const SignupForm = ({ navigation }) => {
           username: username,
           email: authUser.user.email,
           profile_picture: await getRandomProfilePic(),
-          bio: "",
+          bio: bio,
           followers: [],
           following: [],
         });
@@ -56,9 +57,21 @@ const SignupForm = ({ navigation }) => {
   return (
     <View style={styles.wrapper}>
       <Formik
-        initialValues={{ name: "", email: "", username: "", password: "" }}
+        initialValues={{
+          name: "",
+          email: "",
+          username: "",
+          password: "",
+          bio: "",
+        }}
         onSubmit={(values) => {
-          onSignup(values.name, values.email, values.password, values.username);
+          onSignup(
+            values.name,
+            values.email,
+            values.password,
+            values.username,
+            values.bio
+          );
         }}
         validationSchema={SignupFormSchema}
         validateOnMount={true}
@@ -107,6 +120,28 @@ const SignupForm = ({ navigation }) => {
                 onChangeText={handleChange("username")}
                 onBlur={handleBlur("username")}
                 value={values.username}
+              />
+            </View>
+
+            <View
+              style={[
+                styles.inputField,
+                {
+                  borderColor:
+                    1 > values.bio.length || values.bio.length > 1
+                      ? "#ccc"
+                      : "red",
+                },
+              ]}
+            >
+              <TextInput
+                placeholderTextColor="#444"
+                placeholder="Bio"
+                autoCapitalize="none"
+                textContentType="bio"
+                onChangeText={handleChange("bio")}
+                onBlur={handleBlur("bio")}
+                value={values.bio}
               />
             </View>
 

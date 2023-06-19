@@ -1,11 +1,4 @@
-import {
-  View,
-  Text,
-  Pressable,
-  Image,
-  Dimensions,
-  SafeAreaView,
-} from "react-native";
+import { View, Pressable, Image, Dimensions, SafeAreaView } from "react-native";
 import React, { useState, useEffect } from "react";
 import AccountInfo from "../components/accountScreen/AccountInfo";
 import Header from "../components/accountScreen/Header";
@@ -39,7 +32,14 @@ const AccountScreen = ({ navigation, route }) => {
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       <Header email={email} navigation={navigation} />
       <AccountInfo email={email} />
-      <View style={{ flexDirection: "row", flexWrap: 1, marginTop: 20 }}>
+      <View
+        style={{
+          flexDirection: "row",
+          flexWrap: "wrap",
+          marginTop: 20,
+          justifyContent: "center",
+        }}
+      >
         {posts?.map((post, index) => (
           <Pressable
             key={post.id}

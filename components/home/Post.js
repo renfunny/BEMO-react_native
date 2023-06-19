@@ -182,7 +182,7 @@ const Icon = ({ imgStyle, imgUrl }) => (
 // );
 
 const Caption = ({ post }) => (
-  <View style={{ marginTop: -25, width: "50%" }}>
+  <View style={{ marginTop: -30, width: "75%" }}>
     <Text style={{ color: "black" }}>
       <Text style={{ fontWeight: 600 }}>{post.user}</Text>
       <Text> {post.caption}</Text>

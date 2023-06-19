@@ -1,43 +1,46 @@
-# My Universal React Project
+# BEMO (React Native)
 
-<p>
-  <!-- iOS -->
-  <a href="https://itunes.apple.com/app/apple-store/id982107779">
-    <img alt="Supports Expo iOS" longdesc="Supports Expo iOS" src="https://img.shields.io/badge/iOS-4630EB.svg?style=flat-square&logo=APPLE&labelColor=999999&logoColor=fff" />
-  </a>
-  <!-- Android -->
-  <a href="https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=blankexample">
-    <img alt="Supports Expo Android" longdesc="Supports Expo Android" src="https://img.shields.io/badge/Android-4630EB.svg?style=flat-square&logo=ANDROID&labelColor=A4C639&logoColor=fff" />
-  </a>
-  <!-- Web -->
-  <a href="https://docs.expo.dev/workflow/web/">
-    <img alt="Supports Expo Web" longdesc="Supports Expo Web" src="https://img.shields.io/badge/web-4630EB.svg?style=flat-square&logo=GOOGLE-CHROME&labelColor=4285F4&logoColor=fff" />
-  </a>
-</p>
+![](./assets/BEMO.gif)
 
-## 🚀 How to use
+## License
 
-- Install packages with `yarn` or `npm install`.
-  - If you have native iOS code run `npx pod-install`
-- Run `yarn start` or `npm run start` to start the bundler.
-- Open the project in a React runtime to try it:
-  - iOS: [Client iOS](https://itunes.apple.com/app/apple-store/id982107779)
-  - Android: [Client Android](https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=blankexample)
-  - Web: Any web browser
+[![Project license](https://img.shields.io/badge/license-Apache2.0-green)](https://opensource.org/licenses/Apache-2.0)
 
-## Running/Modifying Native Code
+## Table of Contents
 
-You can generate native iOS and Android projects from your Expo config file (**app.json**/ **app.config.js**) by runnning `npx expo prebuild`. These native projects can then be compiled and run via XCode and Android Studio.
+- [Description](#description)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contribution](#contribution)
+- [Testing](#testing)
+- [Contact Information](#contact-information)
 
-> 💡 Learn more about [native code in Expo](https://docs.expo.dev/workflow/customizing/)
+## Description
 
-## Publishing
+BEMO is an application created with React Native that allows the user to browse different stores and see what items they offer. The user can follow the store and like/comment on their posts. The user can also create their own store and post items for other users to see, search for other stores, and view the items all stores have to offer in the "Store" screen. The user will be able to see their friends list and navigate to their profile to see their posts. The application uses Firebase to store all the user's data, authenticate the user, and store each post. The application was created using Expo and the React Native framework. The Design of the application was created using Figma by Pedro Cordova (Graphic desgner). This project allowed me to further dive into the React Native framework and learn how to use Firebase to store data. It helped me understand how a social media app can be created and further my knowledge in React Native.
 
-- Deploy the native app to the App store and Play store using this guide: [Deployment](https://docs.expo.dev/distribution/app-stores/).
-- Deploy the website using this guide: [Web deployment](https://docs.expo.dev/distribution/publishing-websites/).
+## Installation
 
-## 📝 Notes
+The app has not been released on the app store, therefore, it cannot be oppened unless the code itself is downloaded. If so, open the source code in the terminal and use the command `npm install` to install all the dependencies needed, then use the command `npm run web` to open the application locally (Note that the app was designed for mobile only, therefore the web version will look very odd).
 
-- Learn more about [Universal React](https://docs.expo.dev/).
-- See what API and components are [available in the React runtimes](https://docs.expo.dev/versions/latest/).
-- Find out more about developing apps and websites: [Guides](https://docs.expo.dev/guides/).
+## Usage
+
+This app can be used to browse different clothing items in an efficient manner. It allows the user to follow their favourite brands and like/comment on their posts. It also allows users to post their own items for sale for others to see.
+
+## License
+
+Apache2.0
+
+## Contribution
+
+Huge thanks to Pedro Cordova and Martin Lazzarin for the design of the application.
+Suggestions and constructive critism are always welcomed!
+
+## Testing
+
+There are no test for this project
+
+## Contact Information
+
+- GitHub: [renfunny](https://github.com/renfunny)
+- Email: [ren99cordova@gmail.com](mailto:ren99cordova@gmail.com)

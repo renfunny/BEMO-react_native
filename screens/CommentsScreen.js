@@ -193,7 +193,7 @@ const CommentsScreen = ({ route }) => {
             <TextInput
               placeholder={`Add a comment as ${userInfo?.username}...`}
               placeholderTextColor="#a9a9a9"
-              style={{ flex: 1, color: "white" }}
+              style={{ flex: 1, color: "black" }}
               value={comment}
               onFocus={() => setPressed(true)}
               onChange={(e) => setComment(e.nativeEvent.text)}
