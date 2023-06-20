@@ -1,10 +1,8 @@
 import { SafeAreaView, StyleSheet, ScrollView } from "react-native";
 import React, { useEffect, useState } from "react";
 import Header from "../components/home/Header";
-import Stories from "../components/home/Stories";
+import SearchBar from "../components/home/SearchBar";
 import Post from "../components/home/Post";
-import { POSTS } from "../data/posts";
-import BottomTabs, { bottomTabIcons } from "../components/home/BottomTabs";
 import { db } from "../firebase";
 
 const HomeScreen = ({ navigation }) => {
@@ -22,20 +20,22 @@ const HomeScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <Header navigation={navigation} />
-      <Stories />
-      <ScrollView>
+      <SearchBar />
+      <ScrollView
+        style={{ marginBottom: 30 }}
+        showsVerticalScrollIndicator={false}
+      >
         {posts.map((post, index) => (
-          <Post post={post} key={index} />
+          <Post post={post} key={index} index={index} />
         ))}
       </ScrollView>
-      <BottomTabs icons={bottomTabIcons} />
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "black",
+    backgroundColor: "white",
     flex: 1,
   },
 });

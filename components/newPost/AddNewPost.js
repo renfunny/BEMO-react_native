@@ -16,7 +16,7 @@ const Header = ({ navigation }) => (
     <TouchableOpacity onPress={() => navigation.goBack()}>
       <Image
         source={{
-          uri: "https://img.icons8.com/ios-glyphs/90/ffffff/back.png",
+          uri: "https://img.icons8.com/ios-glyphs/90/0033CC/back.png",
         }}
         style={{ width: 30, height: 30 }}
       />
@@ -34,9 +34,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    paddingVertical: 10,
   },
   headerText: {
-    color: "white",
+    color: "black",
     fontWeight: 700,
     fontSize: 20,
     marginRight: 25,
