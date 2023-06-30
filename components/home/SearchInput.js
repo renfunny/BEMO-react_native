@@ -56,7 +56,7 @@ const SearchInput = () => {
   return (
     <View style={styles.container}>
       <TextInput
-        placeholder="Search..."
+        placeholder="Buscar..."
         value={searchQuery}
         onChangeText={setSearchQuery}
         style={styles.searchInput}

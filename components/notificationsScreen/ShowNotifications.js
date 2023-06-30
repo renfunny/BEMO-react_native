@@ -12,7 +12,7 @@ const ShowNotifications = () => {
 const Header = () => (
   <View style={styles.headerContainer}>
     <Image />
-    <Text style={styles.headerText}>Notifications</Text>
+    <Text style={styles.headerText}>Bandeja de Notificaciones</Text>
     <TouchableOpacity>
       <Image
         source={{
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     color: "black",
     fontWeight: 700,
     fontSize: 20,
-    marginRight: 100,
+    marginRight: 27,
   },
 });
 

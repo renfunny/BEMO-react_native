@@ -21,7 +21,7 @@ const Header = ({ navigation }) => (
         style={{ width: 30, height: 30 }}
       />
     </TouchableOpacity>
-    <Text style={styles.headerText}>New Post</Text>
+    <Text style={styles.headerText}>Nueva Publicacion</Text>
     <Text></Text>
   </View>
 );

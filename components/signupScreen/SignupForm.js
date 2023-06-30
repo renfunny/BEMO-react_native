@@ -90,7 +90,7 @@ const SignupForm = ({ navigation }) => {
               ]}
             >
               <TextInput
-                placeholder="Full Name"
+                placeholder="Nombre"
                 placeholderTextColor="#444"
                 autoCapitalize="none"
                 autoCorrect={false}
@@ -114,7 +114,7 @@ const SignupForm = ({ navigation }) => {
             >
               <TextInput
                 placeholderTextColor="#444"
-                placeholder="Username"
+                placeholder="Nombre de usuario"
                 autoCapitalize="none"
                 textContentType="username"
                 onChangeText={handleChange("username")}
@@ -136,7 +136,7 @@ const SignupForm = ({ navigation }) => {
             >
               <TextInput
                 placeholderTextColor="#444"
-                placeholder="Bio"
+                placeholder="Descripcion"
                 autoCapitalize="none"
                 textContentType="bio"
                 onChangeText={handleChange("bio")}
@@ -196,13 +196,13 @@ const SignupForm = ({ navigation }) => {
               style={styles.button(isValid)}
               onPress={handleSubmit}
             >
-              <Text style={styles.buttonText}>Sign Up</Text>
+              <Text style={styles.buttonText}>Inscribete</Text>
             </Pressable>
 
             <View style={styles.loginContainer}>
-              <Text>Already have an account?</Text>
+              <Text>Ya tienes una cuenta?</Text>
               <TouchableOpacity onPress={() => navigation.goBack()}>
-                <Text style={{ color: "#6bb0f5" }}> Log In</Text>
+                <Text style={{ color: "#6bb0f5" }}> Iniciar sesion</Text>
               </TouchableOpacity>
             </View>
           </>

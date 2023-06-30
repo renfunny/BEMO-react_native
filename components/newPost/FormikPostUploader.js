@@ -154,10 +154,15 @@ const FormikPostUploader = ({ navigation }) => {
             />
             <View style={{ flex: 1, marginLeft: 12 }}>
               <TextInput
-                placeholder="Write a caption..."
+                placeholder="Descripcion..."
                 placeholderTextColor="gray"
                 multiline={true}
-                style={{ color: "black", fontSize: 20 }}
+                style={{
+                  color: "black",
+                  fontSize: 20,
+                  flexWrap: "wrap",
+                  height: 100,
+                }}
                 onChangeText={handleChange("caption")}
                 onBlur={handleBlur("caption")}
                 value={values.caption}
@@ -175,7 +180,7 @@ const FormikPostUploader = ({ navigation }) => {
             }}
             onPress={getImageFromRoll}
           >
-            <Text style={{ fontSize: 18, color: "white" }}>Upload Image</Text>
+            <Text style={{ fontSize: 18, color: "white" }}>Cargar Imagen</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={{
@@ -185,7 +190,7 @@ const FormikPostUploader = ({ navigation }) => {
           >
             <Button
               onPress={handleSubmit}
-              title="SHARE"
+              title="Compartir"
               disabled={!isValid}
               color="#0033CC"
             />

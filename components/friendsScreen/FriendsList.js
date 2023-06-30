@@ -84,7 +84,7 @@ const FriendsList = () => {
                     textDecorationLine: "underline",
                   }}
                 >
-                  Visit Profile
+                  Visitar perfil
                 </Text>
               </TouchableOpacity>
             </View>

@@ -104,7 +104,9 @@ const LoginForm = ({ navigation }) => {
             </View>
 
             <View style={{ alignItems: "flex-end", marginBottom: 30 }}>
-              <Text style={{ color: "#6bb0e5" }}>Forgot Password?</Text>
+              <Text style={{ color: "#6bb0e5" }}>
+                Has olvidado tu contraseña?
+              </Text>
             </View>
 
             <Pressable
@@ -113,13 +115,13 @@ const LoginForm = ({ navigation }) => {
               onPress={handleSubmit}
               disabled={!isValid}
             >
-              <Text style={styles.buttonText}>Log In</Text>
+              <Text style={styles.buttonText}>Iniciar sesion</Text>
             </Pressable>
 
             <View style={styles.signupContainer}>
-              <Text>Don't have an account?</Text>
+              <Text>No tiene cuenta?</Text>
               <TouchableOpacity onPress={() => navigation.push("SignupScreen")}>
-                <Text style={{ color: "#6bb0e5" }}> Sign up</Text>
+                <Text style={{ color: "#6bb0e5" }}> Inscribete</Text>
               </TouchableOpacity>
             </View>
           </>

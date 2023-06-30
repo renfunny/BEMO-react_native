@@ -31,7 +31,7 @@ const StoreScreen = ({ navigation }) => {
           marginTop: 20,
         }}
       >
-        Store
+        Tienda
       </Text>
       <ScrollView>
         <View

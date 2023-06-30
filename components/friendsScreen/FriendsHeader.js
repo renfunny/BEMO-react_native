@@ -14,7 +14,7 @@ const FriendsHeader = ({ navigation }) => {
 const Header = ({ navigation }) => (
   <View style={styles.headerContainer}>
     <Image />
-    <Text style={styles.headerText}>Friends List</Text>
+    <Text style={styles.headerText}>Lista de amigos</Text>
     <TouchableOpacity>
       <Image
         source={{
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     color: "black",
     fontWeight: 700,
     fontSize: 20,
-    marginRight: 100,
+    marginRight: 82,
   },
   searchContainer: {
     justifyContent: "space-between",

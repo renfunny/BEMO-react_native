@@ -11,7 +11,7 @@ const NotificationsInfo = () => {
       }}
     >
       <Text style={{ color: "black", fontWeight: 700 }}>
-        No new notifications!
+        ¡No hay notificaciones nuevas!
       </Text>
     </View>
   );
