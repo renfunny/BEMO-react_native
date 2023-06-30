@@ -119,7 +119,7 @@ const CommentsScreen = ({ route }) => {
                 marginRight: 8,
               }}
             />
-            <View>
+            <View style={{ width: "90%", flexWrap: "wrap" }}>
               <Text>
                 <Text style={{ color: "black", fontWeight: "800" }}>
                   {post?.username}
@@ -149,12 +149,19 @@ const CommentsScreen = ({ route }) => {
                       marginRight: 8,
                     }}
                   />
-                  <View>
+                  <View style={{ width: "90%", flexWrap: "wrap" }}>
                     <Text>
                       <Text style={{ color: "black", fontWeight: "800" }}>
                         {comment.user}
                       </Text>
-                      <Text style={{ color: "black" }}> {comment.comment}</Text>
+                      <Text
+                        style={{
+                          color: "black",
+                        }}
+                      >
+                        {" "}
+                        {comment.comment}
+                      </Text>
                     </Text>
                   </View>
                 </View>
